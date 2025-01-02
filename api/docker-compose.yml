@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Definindo a senha do usuário root
+      MYSQL_DATABASE: api_potiguar  # Criando o banco de dados 'api_potiguar'
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mysql_network
+
+volumes:
+  mysql_data:
+
+networks:
+  mysql_network:
+    driver: bridge

@@ -1,0 +1,15 @@
+meta {
+  name: getAll
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url_base}}/feedbacks
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2NDMyLCJDbGFpbXMiOiJVU0VSIn0.qOdoKoG6MpR4xfYU_P5r69Zd2iol9V8vUsECeISBt50
+}
