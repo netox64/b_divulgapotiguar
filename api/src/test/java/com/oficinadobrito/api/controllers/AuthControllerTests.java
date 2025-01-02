@@ -112,29 +112,4 @@ public class AuthControllerTests {
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
-
-//    @DisplayName("When token is sent to reset password and success occurs")
-//    @Test
-//    public void testRedefinirSenhaSuccess() {
-//        RedemPasswordDto redemPasswordDto = new RedemPasswordDto("valid-token", "new-password");
-//        VerifyTokenPassword verifyTokenPassword = new VerifyTokenPassword("user@example.com", true);
-//        when(usuariosService.verifyHash(redemPasswordDto.token())).thenReturn(verifyTokenPassword);
-//        when(usuariosService.redefinirSenha(verifyTokenPassword.getEmail(), redemPasswordDto.password())).thenReturn(true);
-//
-//        ResponseEntity<String> response = authenticationsController.redefinirSenha(redemPasswordDto);
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals("sucesso -> redefinido password: true", response.getBody());
-//    }
-//
-//    @Test
-//    public void testRedefinirSenha_NotFound() {
-//        RedemPasswordDto redemPasswordDto = new RedemPasswordDto("invalid-token", "new-password");
-//        VerifyTokenPassword verifyTokenPassword = new VerifyTokenPassword("", false);
-//        when(usuariosService.verifyHash(redemPasswordDto.token())).thenReturn(verifyTokenPassword);
-//
-//        ResponseEntity<String> response = authenticationsController.redefinirSenha(redemPasswordDto);
-//
-//        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-//    }
 }

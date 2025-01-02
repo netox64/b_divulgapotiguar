@@ -12,14 +12,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
-@SpringBootTest
 @ActiveProfiles("test")
+@SpringBootTest()
 public class GenericsServicesTests {
     @Mock
     private IGenericRepository<Anuncio> repository;

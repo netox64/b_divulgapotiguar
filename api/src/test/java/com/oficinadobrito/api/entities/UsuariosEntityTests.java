@@ -6,16 +6,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.lang.reflect.Field;
 
 import com.oficinadobrito.api.utils.enums.UserRole;
 
-@ActiveProfiles("test")
-@SpringBootTest
 public class UsuariosEntityTests {
     private Usuario usuario;
     private String novo;

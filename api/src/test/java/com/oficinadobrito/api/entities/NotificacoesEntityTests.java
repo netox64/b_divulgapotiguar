@@ -6,14 +6,10 @@ import com.oficinadobrito.api.utils.dtos.notificacao.UpdateNotificacaoDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles("test")
-@SpringBootTest
 public class NotificacoesEntityTests {
     private Notificacao notificacao;
     private String novoAssunto;
@@ -82,22 +78,6 @@ public class NotificacoesEntityTests {
         assertEquals(String.class, status.getType(), "The type of the status attribute must be String");
         assertEquals(novoStatus, notificacao.getStatus(), "The status value was not set correctly");
     }
-
-//    @DisplayName("Notificacao dataEnvio must be a date in the past")
-//    @Test
-//    void testNotificacaoDataEnvioMustBeInThePast() {
-//        // Given - Arrange
-//        LocalDate dataFutura = LocalDate.now().plusDays(1);
-//
-//        // When - Act & Then - Assert
-//        assertThrows(IllegalArgumentException.class, () -> {
-//            notificacao.setDataEnvio(dataFutura);
-//        });
-//
-//        // Valid date in the past
-//        notificacao.setDataEnvio(novaDataEnvio);
-//        assertEquals(novaDataEnvio, notificacao.getDataEnvio(), "The dataEnvio value was not set correctly");
-//    }
 
     @DisplayName("Create Notificacao from DTO")
     @Test

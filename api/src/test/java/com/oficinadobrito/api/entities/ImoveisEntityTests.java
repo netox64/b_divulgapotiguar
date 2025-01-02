@@ -6,15 +6,10 @@ import com.oficinadobrito.api.utils.dtos.imovel.UpdateImovelDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.lang.reflect.Field;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles("test")
-@SpringBootTest
 public class ImoveisEntityTests {
     private Imovel imovel;
     private String novoNome;

@@ -22,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
 @ActiveProfiles("test")
+@SpringBootTest()
 public class UsuariosServiceTests {
     @Mock
     private JwtService jwtService;

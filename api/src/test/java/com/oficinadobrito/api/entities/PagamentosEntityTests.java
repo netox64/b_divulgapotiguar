@@ -7,14 +7,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.lang.reflect.Field;
 import java.math.BigInteger;
 
-@SpringBootTest
-@ActiveProfiles("test")
 public class PagamentosEntityTests {
     private Pagamento pagamento;
     private String novoTipo;
