@@ -1,11 +1,11 @@
-Anuncia_potiguar
+# divulga_potiguar
 
 <div align="center">
   <img src="https://github.com/yt-neto/milkapi/blob/main/docs/img/img1.png" width="250" height="250" />
   <img src="https://github.com/yt-neto/milkapi/blob/main/docs/img/img2.png" width="250" height="250" />
 </div>
 
-<h4 align="center">This is a project to promote the sale of properties in the Potiguar region </h4>
+<h4 align="center">This project is a backend with logic related to the promotion of properties that are for sale in the designated region.</h4>
 
 <p align="center">
 <img src="https://sonarcloud.io/api/project_badges/measure?project=netox64_b_divulgapotiguar&metric=alert_status">
@@ -59,39 +59,24 @@ api.src
 
 <img src="https://github.com/yt-neto/milkapi/blob/main/docs/diagramas/banco.png" />
 
-## Api_resources v1
-
-### Auth 
-
-- open to everyone
- ```http
-  POST /api/auth/login
- ```
- ```http
-  POST /api/auth/register
- ```
- ```http
-  POST /api/auth/refresh-token
- ```
-- Authorize Policy _"QuemPuderGerenciar"(Gerente)_
-
- ```http
-  POST /api/auth/revoke/{email}
- ```
-   ```http
-  POST api/auth/createRole
- ```
-   ```http
-  POST /api/auth/addUserToRole
- ```
 
 ## Prerequisites
 
 - SDKMAN for manager version jdk
-- JDK 17
+- JDK 23
 - Docker and Docke-compose plugin
 
 ## Running_Application
+- create a file called application-dev.properties inside the resources folder
+- define a jwt with base 64 characters, and your zoho email and password. And finally a secret
+- You can use this example if you want, just need your Zoho email and password.
+
+```
+  jwt=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  username=example@zohomail.com
+  password=Example34#
+  token_secret=um_toquen_qualquer
+```
 
 - create the bank:
  ```
@@ -115,7 +100,7 @@ api.src
 
 - open your postman desktop
 - click import
-- import from z_Postman_Endpoints folder
+- import from json Bruno endpoints folder
 
 > [!IMPORTANT]
 > When opening the endpoints, check the "base_url" addressing variable if it is correct.
