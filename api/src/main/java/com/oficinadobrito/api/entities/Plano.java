@@ -1,6 +1,6 @@
 package com.oficinadobrito.api.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.oficinadobrito.api.utils.dtos.plano.CreatePlanoDto;
 import com.oficinadobrito.api.utils.dtos.plano.UpdatePlanoDto;
@@ -34,12 +34,12 @@ public class Plano implements Serializable{
 
     private LocalDate dataAdquerido;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "pagamentoId")
     private Pagamento pagamento;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuarioId")
     private Usuario usuario;

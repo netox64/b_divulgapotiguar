@@ -44,19 +44,10 @@ public class Anuncio implements Serializable{
     @FutureOrPresent(message = "Announcement date must be in the present or future")
     private LocalDate dataAnuncio;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "anuncio")
-    private Set<Feedback> feedbacks;
-
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuarioId")
     private Usuario usuario;
-
-    @JsonManagedReference
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "anuncio_categoria", joinColumns={ @JoinColumn(name = "anuncioId")},inverseJoinColumns = {@JoinColumn(name = "categoriaId")})
-    private Set<Categoria> categorias;
 
     @JsonBackReference
     @OneToOne
@@ -67,6 +58,15 @@ public class Anuncio implements Serializable{
     @ManyToOne
     @JoinColumn(name = "planoId")
     private Plano plano;
+
+    @JsonManagedReference
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "anuncio_categoria", joinColumns={ @JoinColumn(name = "anuncioId")},inverseJoinColumns = {@JoinColumn(name = "categoriaId")})
+    private Set<Categoria> categorias;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "anuncio")
+    private Set<Feedback> feedbacks;
 
     public Anuncio() {
         this.feedbacks = new HashSet<>();

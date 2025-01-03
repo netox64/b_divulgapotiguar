@@ -91,7 +91,10 @@ api.src
 
 - to execute:
 ```
-  java -jar target/nome_projeto-1.0-SNAPSHOT.jar
+  java -jar target/nome_projeto-1.0-SNAPSHOT.jar 
+  or
+  mvn spring-boot:run
+  
 ```
 
 - http://localhost:8080/swagger-ui/index.html?urls.primaryName=public

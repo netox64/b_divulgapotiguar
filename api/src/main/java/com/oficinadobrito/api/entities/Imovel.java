@@ -1,5 +1,6 @@
 package com.oficinadobrito.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.oficinadobrito.api.utils.dtos.imovel.CreateImovelDto;
 import com.oficinadobrito.api.utils.dtos.imovel.UpdateImovelDto;
 import jakarta.persistence.*;
@@ -36,6 +37,7 @@ public class Imovel implements Serializable{
     @NotBlank(message = "A Description of imovel cannot be empty")
     private String sobre;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "imovel")
     private Anuncio anuncio;
 

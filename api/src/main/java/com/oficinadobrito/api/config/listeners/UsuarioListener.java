@@ -1,26 +1,26 @@
 package com.oficinadobrito.api.config.listeners;
 
 import com.oficinadobrito.api.entities.Usuario;
+import com.oficinadobrito.api.services.PasswordEncryptor;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import org.springframework.stereotype.Component;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.time.LocalDate;
 
 @Component
 public class UsuarioListener {
-    private final PasswordEncoder passwordEncoder;
+    
+    private static PasswordEncryptor passwordEncryptor;
 
-    public UsuarioListener(PasswordEncoder passwordEncoder){
-        this.passwordEncoder = passwordEncoder;
+    public static void setPasswordEncryptor(PasswordEncryptor passwordEncryptor) {
+        UsuarioListener.passwordEncryptor = passwordEncryptor;
     }
 
     @PrePersist
     @PreUpdate
     public void encryptPassword(Usuario usuario) {
         if (usuario.getPassword() != null && !usuario.getPassword().isEmpty()) {
-            usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+            usuario.setPassword(passwordEncryptor.encode(usuario.getPassword()));
         }
 
         if (usuario.getCreatedAt() == null) {
