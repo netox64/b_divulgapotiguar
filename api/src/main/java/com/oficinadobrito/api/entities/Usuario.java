@@ -1,6 +1,6 @@
 package com.oficinadobrito.api.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.oficinadobrito.api.config.listeners.UsuarioListener;
 import com.oficinadobrito.api.utils.dtos.usuario.CreateUserDto;
 import com.oficinadobrito.api.utils.dtos.usuario.UpdateUsuarioDto;
@@ -13,7 +13,6 @@ import org.hibernate.annotations.UuidGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
@@ -25,6 +24,8 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_usuarios")
 public class Usuario implements UserDetails {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @UuidGenerator
@@ -53,32 +54,32 @@ public class Usuario implements UserDetails {
     @Column(nullable = false, updatable = false)
     private LocalDate createdAt;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
     private Set<Notificacao> notificacoes;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
     private Set<Feedback> feedbacks;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
     private Set<Pagamento> pagamentos;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
     private Set<Plano> planos;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
     private Set<Anuncio> anuncios;
 
     public Usuario(){
-        this.notificacoes = new HashSet<Notificacao>();
-        this.feedbacks = new HashSet<Feedback>();
-        this.pagamentos = new HashSet<Pagamento>();
-        this.planos = new HashSet<Plano>();
-        this.anuncios = new HashSet<Anuncio>();
+        this.notificacoes = new HashSet<>();
+        this.feedbacks = new HashSet<>();
+        this.pagamentos = new HashSet<>();
+        this.planos = new HashSet<>();
+        this.anuncios = new HashSet<>();
     }
 
     public Usuario(String username, String email, String password, UserRole role) {

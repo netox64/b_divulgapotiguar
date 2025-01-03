@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
 import java.math.BigInteger;
 
-public class PagamentosEntityTests {
+class PagamentosEntityTests {
     private Pagamento pagamento;
     private String novoTipo;
     private String novoCartao;
@@ -131,17 +131,4 @@ public class PagamentosEntityTests {
         Assertions.assertNull(updatedPagamento.getCartao(), "The cartao should be null for Pix");
         Assertions.assertEquals(dto.chavePix(), updatedPagamento.getChavePix(), "The chavePix was not correctly updated from DTO");
     }
-
-//    @DisplayName("Pagamento must generate a valid comprovante number")
-//    @Test
-//    void testPagamentoMustGenerateValidComprovante() {
-//        // Given - Arrange
-//        BigInteger numComprovante1 = pagamento.getNumComprovante();
-//        BigInteger numComprovante2 = GenerateBigInteger.generateCustomRandom();
-//
-//        // Then - Assert
-//        Assertions.assertNotNull(numComprovante1, "Comprovante number should not be null");
-//        Assertions.assertNotEquals(numComprovante1, numComprovante2, "Comprovante numbers should be different");
-//        Assertions.assertTrue(numComprovante1.bitLength() >= 32, "Comprovante number should have the correct length");
-//    }
 }

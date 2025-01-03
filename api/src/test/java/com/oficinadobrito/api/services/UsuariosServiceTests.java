@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 
 @ActiveProfiles("test")
 @SpringBootTest()
-public class UsuariosServiceTests {
+class UsuariosServiceTests {
     @Mock
     private JwtService jwtService;
 

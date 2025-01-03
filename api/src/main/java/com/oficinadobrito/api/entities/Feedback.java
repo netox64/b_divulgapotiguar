@@ -1,6 +1,6 @@
 package com.oficinadobrito.api.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.oficinadobrito.api.utils.dtos.feedback.CreateFeedbackDto;
 import com.oficinadobrito.api.utils.dtos.feedback.UpdateFeedbackDto;
 import jakarta.persistence.*;
@@ -8,11 +8,14 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 @Entity
 @Table(name = "tb_feedbacks")
-public class Feedback {
+public class Feedback implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,18 +32,15 @@ public class Feedback {
     @NotEmpty(message = "property 'comentario' cannot be null, is required a value")
     private String remetenteUsername;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuarioId")
     private Usuario usuario;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "anuncioId")
     private Anuncio anuncio;
-
-    public Feedback() {
-    }
 
     public BigInteger getFeedbackId() {
         return feedbackId;

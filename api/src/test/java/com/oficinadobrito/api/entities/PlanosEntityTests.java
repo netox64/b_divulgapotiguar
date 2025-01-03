@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PlanosEntityTests {
+class PlanosEntityTests {
     private Plano plano;
     private double valorPlano;
     private int quantAnuncio;

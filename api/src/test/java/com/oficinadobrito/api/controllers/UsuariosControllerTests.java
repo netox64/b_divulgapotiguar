@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-public class UsuariosControllerTests {
+class UsuariosControllerTests {
     @InjectMocks
     private UsuariosController usuariosController;
 
@@ -37,13 +37,13 @@ public class UsuariosControllerTests {
     private UsuariosService usuariosService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @DisplayName("Test for when the controller's get all users method is called it returns a list of objects and the http 200 method")
     @Test
-    public void testGetAllUsuarios() {
+    void testGetAllUsuarios() {
         List<Usuario> usuarios = Arrays.asList(new Usuario(), new Usuario());
         when(usuariosService.getAll()).thenReturn(usuarios);
 
@@ -55,7 +55,7 @@ public class UsuariosControllerTests {
 
     @DisplayName("Test for when the controller's get one users method is called it returns a one object http 200 method")
     @Test
-    public void testGetOneUsuarioSuccess() {
+    void testGetOneUsuarioSuccess() {
         String id = "1";
         Usuario usuario = new Usuario();
         when(usuariosService.findUsuarioById(id)).thenReturn(usuario);
@@ -68,7 +68,7 @@ public class UsuariosControllerTests {
 
     @DisplayName("Tested if when searching for a non-existent user the controller throws the correct exception")
     @Test
-    public void testGetOneUsuario_NotFound() {
+    void testGetOneUsuario_NotFound() {
         String id = "1";
         when(usuariosService.findUsuarioById(id)).thenThrow(new ResourceNotFoundException("Usuario not found"));
 
@@ -78,113 +78,4 @@ public class UsuariosControllerTests {
 
         assertEquals("Usuario not found", exception.getMessage());
     }
-
-//    @Test
-//    public void testUpdateUsuario_Success() {
-//        String id = "1";
-//        UpdateUsuarioDto updateDto = new UpdateUsuarioDto(); // Preencha conforme necessário
-//        Usuario usuarioUpdate = new Usuario(); // Preencha conforme necessário
-//        when(usuariosService.updateUsuario(id, usuarioUpdate)).thenReturn(usuarioUpdate);
-//
-//        ResponseEntity<?> response = usuariosController.updateUsuario(id, updateDto);
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(usuarioUpdate, response.getBody());
-//    }
-//
-//    @Test
-//    public void testGetAllNotificaoesForUsuarioId_Success() {
-//        String id = "1";
-//        Set<Notificacao> notificacoes = new HashSet<>(Arrays.asList(new Notificacao()));
-//        when(notificacoesService.getAllNotificationForUsuario(id)).thenReturn(notificacoes);
-//
-//        ResponseEntity<?> response = usuariosController.getAllNotificaoesForUsuarioId(id);
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(notificacoes, response.getBody());
-//    }
-//
-//    @Test
-//    public void testGetAllNotificaoesForUsuarioId_NotFound() {
-//        String id = "1";
-//        when(notificacoesService.getAllNotificationForUsuario(id)).thenReturn(new HashSet<>());
-//
-//        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
-//            usuariosController.getAllNotificaoesForUsuarioId(id);
-//        });
-//
-//        assertEquals("Not exists usuario with id informed", exception.getMessage());
-//    }
-//
-//    @Test
-//    public void testGetAllFeedbacksForUsuarioId_Success() {
-//        String id = "1";
-//        Set<Feedback> feedbacks = new HashSet<>(Arrays.asList(new Feedback()));
-//        when(feedbacksService.getAllFeedbacksForUsuario(id)).thenReturn(feedbacks);
-//
-//        ResponseEntity<?> response = usuariosController.getAllFeedbacksForUsuarioId(id);
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(feedbacks, response.getBody());
-//    }
-//
-//    @Test
-//    public void testGetAllFeedbacksForUsuarioId_NotFound() {
-//        String id = "1";
-//        when(feedbacksService.getAllFeedbacksForUsuario(id)).thenReturn(new HashSet<>());
-//
-//        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
-//            usuariosController.getAllFeedbacksForUsuarioId(id);
-//        });
-//
-//        assertEquals("Not exists usuario with id informed", exception.getMessage());
-//    }
-//
-//    @Test
-//    public void testGetAllPagamentosForUsuarioId_Success() {
-//        String id = "1";
-//        Set<Pagamento> pagamentos = new HashSet<>(Arrays.asList(new Pagamento()));
-//        when(pagamentosService.getAllPagamentosForUsuario(id)).thenReturn(pagamentos);
-//
-//        ResponseEntity<?> response = usuariosController.getAllPagamentosForUsuarioId(id);
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(pagamentos, response.getBody());
-//    }
-//
-//    @Test
-//    public void testGetAllPagamentosForUsuarioId_NotFound() {
-//        String id = "1";
-//        when(pagamentosService.getAllPagamentosForUsuario(id)).thenReturn(new HashSet<>());
-//
-//        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
-//            usuariosController.getAllPagamentosForUsuarioId(id);
-//        });
-//
-//        assertEquals("Not exists usuario with id informed", exception.getMessage());
-//    }
-//
-//    @Test
-//    public void testGetAllPlanosForUsuarioId_Success() {
-//        String id = "1";
-//        Set<Plano> planos = new HashSet<>(Arrays.asList(new Plano()));
-//        when(planosService.getAllPlanosForUsuario(id)).thenReturn(planos);
-//
-//        ResponseEntity<?> response = usuariosController.getAllPlanosForUsuarioId(id);
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(planos, response.getBody());
-//    }
-//
-//    @Test
-//    public void testGetAllPlanosForUsuarioId_NotFound() {
-//        String id = "1";
-//        when(planosService.getAllPlanosForUsuario(id)).thenReturn(new HashSet<>());
-//
-//        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
-//            usuariosController.getAllPlanosForUsuarioId(id);
-//        });
-//
-//        assertEquals("Not exists usuario with id informed", exception.getMessage());
-//    }
 }

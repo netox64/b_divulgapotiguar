@@ -1,6 +1,7 @@
 package com.oficinadobrito.api.controllers;
 
 import com.oficinadobrito.api.controllers.interfaces.IController;
+import com.oficinadobrito.api.entities.Anuncio;
 import com.oficinadobrito.api.entities.Plano;
 import com.oficinadobrito.api.services.PlanosService;
 import com.oficinadobrito.api.utils.dtos.plano.CreatePlanoDto;
@@ -11,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 import java.util.stream.StreamSupport;
 
 @RestController
@@ -26,7 +27,7 @@ public class PlanosController implements IController<Plano, CreatePlanoDto, Upda
 
     @PostMapping()
     @Override
-    public ResponseEntity<?> postResource(@RequestBody @Valid CreatePlanoDto resource) {
+    public ResponseEntity<Plano> postResource(@RequestBody @Valid CreatePlanoDto resource) {
         Plano novo = Plano.createDtoToEntity(resource);
         var pagamento = this.planosService.save(novo);
         return ResponseEntity.ok(pagamento);
@@ -35,7 +36,7 @@ public class PlanosController implements IController<Plano, CreatePlanoDto, Upda
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
     public ResponseEntity<List<Plano>> getAllResource() {
-        List<Plano> pagamentoList = StreamSupport.stream(this.planosService.findAll().spliterator(), false).collect(Collectors.toList());
+        List<Plano> pagamentoList = StreamSupport.stream(this.planosService.findAll().spliterator(), false).toList();
         return ResponseEntity.ok(pagamentoList);
     }
 
@@ -62,7 +63,7 @@ public class PlanosController implements IController<Plano, CreatePlanoDto, Upda
     }
 
     @GetMapping("/{id}/anuncios")
-    public ResponseEntity<?> getAnunciosOfPlanoById(@PathVariable("id") BigInteger id) {
+    public ResponseEntity<Set<Anuncio>> getAnunciosOfPlanoById(@PathVariable("id") BigInteger id) {
         Plano plano = this.planosService.findById(id);
         return  ResponseEntity.ok(plano.getAnuncios());
     }

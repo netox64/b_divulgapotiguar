@@ -2,6 +2,7 @@ package com.oficinadobrito.api.controllers;
 
 import com.oficinadobrito.api.controllers.interfaces.IController;
 import com.oficinadobrito.api.entities.Anuncio;
+import com.oficinadobrito.api.entities.Categoria;
 import com.oficinadobrito.api.entities.Imovel;
 import com.oficinadobrito.api.services.AnunciosService;
 import com.oficinadobrito.api.services.CategoriasService;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 import java.util.stream.StreamSupport;
 
 @RestController
@@ -38,7 +39,7 @@ public class AnunciosController implements IController<Anuncio, CreateAnuncioDto
     @PermitAll
     @PostMapping()
     @Override
-    public ResponseEntity<?> postResource(@RequestBody @Valid CreateAnuncioDto resource) {
+    public ResponseEntity<Anuncio> postResource(@RequestBody @Valid CreateAnuncioDto resource) {
         Anuncio novo = Anuncio.createDtoToEntity(resource);
         Imovel imovel = this.imoveisService.findById(resource.imovelId());
         novo.setImovel(imovel);
@@ -53,20 +54,20 @@ public class AnunciosController implements IController<Anuncio, CreateAnuncioDto
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
     public ResponseEntity<List<Anuncio>> getAllResource() {
-        List<Anuncio> anunciosList = StreamSupport.stream(this.anunciosServices.findAll().spliterator(), false).collect(Collectors.toList());
+        List<Anuncio> anunciosList = StreamSupport.stream(this.anunciosServices.findAll().spliterator(), false).toList();
         return ResponseEntity.ok(anunciosList);
     }
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<?> getResourceById(@PathVariable("id") BigInteger id) {
+    public ResponseEntity<Anuncio> getResourceById(@PathVariable("id") BigInteger id) {
         Anuncio anuncio = this.anunciosServices.findById(id);
         return ResponseEntity.ok(anuncio);
     }
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<?> updateResource(@PathVariable("id") BigInteger id, @RequestBody @Valid UpdateAnuncioDto resource) {
+    public ResponseEntity<Anuncio> updateResource(@PathVariable("id") BigInteger id, @RequestBody @Valid UpdateAnuncioDto resource) {
         Anuncio anuncioUpdate = Anuncio.updateDtoToEntity(resource);
 
         // verify Imóvel
@@ -91,13 +92,13 @@ public class AnunciosController implements IController<Anuncio, CreateAnuncioDto
     }
 
     @GetMapping("/{id}/imoveis")
-    public ResponseEntity<?> getImovelOfAnuncioById(@PathVariable("id") BigInteger id) {
+    public ResponseEntity<Imovel> getImovelOfAnuncioById(@PathVariable("id") BigInteger id) {
         Anuncio anuncio = this.anunciosServices.findById(id);
         return ResponseEntity.ok(anuncio.getImovel());
     }
 
     @GetMapping("/{id}/categorias")
-    public ResponseEntity<?> getCategoriasOfAnuncioById(@PathVariable("id") BigInteger id) {
+    public ResponseEntity<Set<Categoria>> getCategoriasOfAnuncioById(@PathVariable("id") BigInteger id) {
         Anuncio anuncio = this.anunciosServices.findById(id);
         return ResponseEntity.ok(anuncio.getCategorias());
     }

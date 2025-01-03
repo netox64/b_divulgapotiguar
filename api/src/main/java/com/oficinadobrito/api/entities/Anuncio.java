@@ -1,6 +1,7 @@
 package com.oficinadobrito.api.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.oficinadobrito.api.utils.dtos.anuncio.CreateAnuncioDto;
 import com.oficinadobrito.api.utils.dtos.anuncio.UpdateAnuncioDto;
 import jakarta.persistence.*;
@@ -8,6 +9,8 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -15,7 +18,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_anuncios")
-public class Anuncio {
+public class Anuncio implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,25 +44,26 @@ public class Anuncio {
     @FutureOrPresent(message = "Announcement date must be in the present or future")
     private LocalDate dataAnuncio;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "anuncio")
     private Set<Feedback> feedbacks;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuarioId")
     private Usuario usuario;
 
-    @JsonIgnore
+    @JsonManagedReference
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "anuncio_categoria", joinColumns={ @JoinColumn(name = "anuncioId")},inverseJoinColumns = {@JoinColumn(name = "categoriaId")})
     private Set<Categoria> categorias;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "imovelId")
     private Imovel imovel;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "planoId")
     private Plano plano;

@@ -17,6 +17,6 @@ public class CategoriasService extends GenericService<Categoria> {
     }
 
     public Set<Categoria> getAllCategoriaWithIds(Set<BigInteger> ids){
-        return (Set<Categoria>) this.categoriaRepository.findAllByCategoriaIdIn(ids);
+        return this.categoriaRepository.findAllByCategoriaIdIn(ids);
     }
 }

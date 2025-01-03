@@ -16,10 +16,6 @@ import java.util.regex.Pattern;
 @SpringBootTest
 class DivulgapotiguarApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-	
 	@Disabled("this test disable for jump")
 	@DisplayName("I tested that the application starts without any errors according to the log")
 	@Test

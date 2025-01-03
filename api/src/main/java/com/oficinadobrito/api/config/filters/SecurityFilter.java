@@ -6,7 +6,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,13 +18,16 @@ import java.util.Optional;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private UsuarioRepository userRepository;
-    @Autowired
-    private JwtService jwtService;
+    private final UsuarioRepository userRepository;
+    private final JwtService jwtService;
+
+    public SecurityFilter(UsuarioRepository userRepository, JwtService jwtService) {
+        this.userRepository = userRepository;
+        this.jwtService = jwtService;
+    }
 
     @Override
-    protected void doFilterInternal(@SuppressWarnings("null") HttpServletRequest request, @SuppressWarnings("null") HttpServletResponse response, @SuppressWarnings("null") FilterChain filterChain)throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)throws ServletException, IOException {
         var token = this.recoverToken(request);
 
         if(token != null){
@@ -37,7 +39,7 @@ public class SecurityFilter extends OncePerRequestFilter {
                 var authentication = new UsernamePasswordAuthenticationToken( user,null,usuario.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }else{
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuário não encontrado");
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuário not found");
                 return;
             }
         }

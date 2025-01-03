@@ -1,18 +1,22 @@
 package com.oficinadobrito.api.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.oficinadobrito.api.utils.dtos.notificacao.CreateNotificacaoDto;
 import com.oficinadobrito.api.utils.dtos.notificacao.UpdateNotificacaoDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
+
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_notificacoes")
-public class Notificacao {
+public class Notificacao implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,13 +36,10 @@ public class Notificacao {
     @NotNull(message = "Status cannot be null")
     private String status;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuarioId")
     private Usuario usuario;
-
-    public Notificacao() {
-    }
 
     public BigInteger getNotificacaoId() {
         return notificacaoId;

@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-public class AuthControllerTests {
+class AuthControllerTests {
 
     @InjectMocks
     private AuthenticationsController authenticationsController;
@@ -29,7 +29,7 @@ public class AuthControllerTests {
     private Usuario usuario;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
 
         this.usuario = new Usuario();
@@ -39,10 +39,9 @@ public class AuthControllerTests {
         this.usuario.setRole(UserRole.USER);
     }
 
-    @SuppressWarnings("null")
     @DisplayName("When the user logs in correctly to the application")
     @Test
-    public void testAutenticarUserFound() {
+    void testAutenticarUserFound() {
         LoginDto loginDto = new LoginDto("user@gmail.com", "password");
         String token = "some-token";
         when(usuariosService.authenticarUsuario(loginDto)).thenReturn(token);
@@ -53,10 +52,9 @@ public class AuthControllerTests {
         assertEquals(token, response.getBody().token());
     }
 
-    @SuppressWarnings("null")
     @DisplayName("When login is not successful, the user does not exist")
     @Test
-    public void testAutenticarUserNotFound() {
+    void testAutenticarUserNotFound() {
         LoginDto loginDto = new LoginDto("user", "wrongpassword");
         when(usuariosService.authenticarUsuario(loginDto)).thenReturn("");
 
@@ -68,7 +66,7 @@ public class AuthControllerTests {
 
     @DisplayName("When the user is successfully registered")
     @Test
-    public void testRegisterSuccess() {
+    void testRegisterSuccess() {
         CreateUserDto createUserDto = new CreateUserDto("user", "user@gmail.com" ,"Password@3000");
 
         when(this.usuariosService.newUsuario(any(Usuario.class))).thenReturn(usuario);
@@ -81,7 +79,7 @@ public class AuthControllerTests {
 
     @DisplayName("When the user is failure registered")
     @Test
-    public void testRegisterFailure() {
+    void testRegisterFailure() {
         CreateUserDto createUserDto = new CreateUserDto("user", "user@gmail.com" ,"Password@3000");
         when(usuariosService.newUsuario(any(Usuario.class))).thenThrow(new BadRequestException("The email provided is in the wrong format or a user with that email is already in this application"));
 
@@ -92,7 +90,7 @@ public class AuthControllerTests {
 
     @DisplayName("when the password reset email is sent")
     @Test
-    public void testSendEmailResetSuccess() {
+    void testSendEmailResetSuccess() {
         String email = "user@example.com";
         when(usuariosService.sendHash(email)).thenReturn(true);
 
@@ -104,7 +102,7 @@ public class AuthControllerTests {
 
     @DisplayName("when the password reset email is sent and email notfound")
     @Test
-    public void testSendEmailResetNotFound() {
+    void testSendEmailResetNotFound() {
         String email = "user@example.com";
         when(usuariosService.sendHash(email)).thenReturn(false);
 

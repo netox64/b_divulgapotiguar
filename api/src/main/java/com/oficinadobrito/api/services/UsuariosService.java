@@ -7,7 +7,6 @@ import com.oficinadobrito.api.utils.validators.EmailValidator;
 import com.oficinadobrito.api.utils.dtos.usuario.LoginDto;
 import com.oficinadobrito.api.utils.dtos.usuario.VerifyTokenPassword;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -28,7 +27,8 @@ public class UsuariosService {
     private final AuthenticationManager authenticationManager;
     private final EmailsService emailsService;
 
-    public UsuariosService(JwtService jwtService, AuthenticationManager authenticationManager, UsuarioRepository usuariosRepository, TokenEmailService tokenEmailService, EmailsService emailsService) {
+    public UsuariosService(JwtService jwtService, AuthenticationManager authenticationManager,
+            UsuarioRepository usuariosRepository, TokenEmailService tokenEmailService, EmailsService emailsService) {
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
         this.usuariosRepository = usuariosRepository;
@@ -39,7 +39,8 @@ public class UsuariosService {
     public Usuario newUsuario(Usuario user) {
         Optional<UserDetails> usuario = this.usuariosRepository.findByEmail(user.getEmail());
         if (!EmailValidator.isValidEmail(user.getEmail()) || usuario.isPresent()) {
-            throw new BadRequestException("The email provided is in the wrong format or a user with that email is already in this application");
+            throw new BadRequestException(
+                    "The email provided is in the wrong format or a user with that email is already in this application");
         }
         return this.usuariosRepository.save(user);
     }
@@ -49,20 +50,21 @@ public class UsuariosService {
         try {
             Authentication authentication = this.authenticationManager.authenticate(usernamePassword);
             return jwtService.generateToken((Usuario) authentication.getPrincipal());
-        } catch (BadCredentialsException e) {
-            return "";
         } catch (AuthenticationException e) {
-            return ""; // Outras exceções de autenticação
+            return "";
         }
     }
 
-    /* The method a seguir fazem parte da logica de redefinição de senhas via email na qual tem as etapas
-     * -  1 Usuario pede para redefinir senha e envia o email que era dele no softaware -> sendHash
-     * -  2 sendHash  retorna um rash
-     * -  3  O usuario de posse do hash deve inserir  o hash fazer POST
-     *    se o rash for verdadeiro verifyHash
-     *    autoriza para redefinir senha
-     * */
+    /*
+     * The method a seguir fazem parte da logica de redefinição de senhas via email
+     * na qual tem as etapas
+     * - 1 Usuario pede para redefinir senha e envia o email que era dele no
+     * softaware -> sendHash
+     * - 2 sendHash retorna um rash
+     * - 3 O usuario de posse do hash deve inserir o hash fazer POST
+     * se o rash for verdadeiro verifyHash
+     * autoriza para redefinir senha
+     */
 
     public boolean sendHash(String email) {
         Optional<Usuario> user = this.usuariosRepository.findUsuarioByEmail(email);
@@ -71,9 +73,10 @@ public class UsuariosService {
             try {
                 token = this.tokenEmailService.encrypt(email);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new BadRequestException("An error occurred while sending your code" + e.getMessage());
             }
-            this.emailsService.enviarEmail(email, "Use o código para redefinir sua senha na aplicação " + "Divulga Potiguar", token);
+            this.emailsService.enviarEmail(email,
+                    "Use o código para redefinir sua senha na aplicação " + "Divulga Potiguar", token);
             return true;
         }
         return false;
@@ -88,9 +91,9 @@ public class UsuariosService {
                 return new VerifyTokenPassword(email, true);
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new BadRequestException("The token does not have the desired shape" + e.getMessage());
         }
-        return new VerifyTokenPassword("false.@gmail.com", false);
+        return new VerifyTokenPassword("", false);
     }
 
     public boolean redefinirSenha(String email, String novaSenha) {
@@ -105,27 +108,29 @@ public class UsuariosService {
     }
 
     public Usuario findUsuarioForId(String id) {
-        return this.usuariosRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not exists Usuario with this id"));
+        return this.usuariosRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not exists Usuario with this id"));
     }
 
     public Usuario updateUsuario(String id, Usuario usuarioUpdate) {
-        Usuario usuarioExistente = this.usuariosRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not exists Usuario with this id"));
+        Usuario usuarioExistente = this.usuariosRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not exists Usuario with this id"));
 
-        if(usuarioUpdate.getPassword() != null){
+        if (usuarioUpdate.getPassword() != null) {
             usuarioExistente.setPassword(usuarioUpdate.getPassword());
-        }
-        else if(usuarioUpdate.getRole() != null){
+        } else if (usuarioUpdate.getRole() != null) {
             usuarioExistente.setRole(usuarioUpdate.getRole());
         }
         return this.usuariosRepository.save(usuarioExistente);
     }
 
-    public List<Usuario> getAll(){
+    public List<Usuario> getAll() {
         return this.usuariosRepository.findAll();
     }
 
-    public Usuario findUsuarioById(String id){
-        return this.usuariosRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Usuario with this id not exists"));
+    public Usuario findUsuarioById(String id) {
+        return this.usuariosRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario with this id not exists"));
     }
 
 }

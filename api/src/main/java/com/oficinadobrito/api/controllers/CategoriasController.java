@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RestController
@@ -26,14 +25,14 @@ public class CategoriasController implements IController<Categoria, CreateCatego
 
     @PostMapping()
     @Override
-    public ResponseEntity<?> postResource(@RequestBody @Valid CreateCategoriaDto resource) {
+    public ResponseEntity<Categoria> postResource(@RequestBody @Valid CreateCategoriaDto resource) {
         Categoria categoria = Categoria.createDtoToEntity(resource);
         return ResponseEntity.ok(this.categoriasServices.save(categoria));
     }
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<?> getResourceById(@PathVariable("id") BigInteger id) {
+    public ResponseEntity<Categoria> getResourceById(@PathVariable("id") BigInteger id) {
         Categoria categoria = this.categoriasServices.findById(id);
         return ResponseEntity.ok(categoria);
     }
@@ -41,13 +40,13 @@ public class CategoriasController implements IController<Categoria, CreateCatego
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
     public ResponseEntity<List<Categoria>> getAllResource() {
-        List<Categoria> categorias = StreamSupport.stream(this.categoriasServices.findAll().spliterator(), false).collect(Collectors.toList());
+        List<Categoria> categorias = StreamSupport.stream(this.categoriasServices.findAll().spliterator(), false).toList();
         return ResponseEntity.ok(categorias);
     }
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<?> updateResource(@PathVariable("id") BigInteger id, @RequestBody @Valid UpdateCategoriaDto resource) {
+    public ResponseEntity<Categoria> updateResource(@PathVariable("id") BigInteger id, @RequestBody @Valid UpdateCategoriaDto resource) {
 
         Categoria categoriaUpdate = Categoria.updateDtoToEntity(resource);
         Categoria categoria = this.categoriasServices.updateById(id, categoriaUpdate);

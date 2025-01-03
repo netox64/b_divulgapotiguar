@@ -1,9 +1,12 @@
 package com.oficinadobrito.api.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.oficinadobrito.api.utils.dtos.pagamento.CreatePagamentoDto;
 import com.oficinadobrito.api.utils.dtos.pagamento.UpdatePagamentoDto;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +14,9 @@ import java.security.SecureRandom;
 
 @Entity
 @Table(name = "tb_pagamentos")
-public class Pagamento {
+public class Pagamento implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,13 +37,14 @@ public class Pagamento {
     @JoinColumn(name = "usuarioId")
     private Usuario usuario;
 
-    @JsonIgnore
+    
+    @JsonManagedReference
     @OneToMany(mappedBy = "pagamento")
     private Set<Plano> planos;
 
     public Pagamento() {
         this.numComprovante = this.generateRandomBigInteger(32);
-        this.planos = new HashSet<Plano>();
+        this.planos = new HashSet<>();
     }
 
     public void setPagamentoId(BigInteger pagamentoId) {

@@ -21,6 +21,6 @@ public class PlanosService extends GenericService<Plano> {
 
     public Set<Plano> getAllPlanosForUsuario(String usuarioId){
        Usuario usuario = this.usuariosService.findUsuarioForId(usuarioId);
-       return usuario == null? new HashSet<>() : new HashSet<Plano>(this.planosRepository.findByUsuarioId(usuarioId));
+       return usuario == null? new HashSet<>() : new HashSet<>(this.planosRepository.findByUsuarioId(usuarioId));
     }
 }

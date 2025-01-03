@@ -21,6 +21,6 @@ public class PagamentosService extends GenericService<Pagamento> {
 
     public Set<Pagamento> getAllPagamentosForUsuario(String usuarioId){
        Usuario usuario = this.usuariosService.findUsuarioForId(usuarioId);
-       return usuario == null? new HashSet<>() : new HashSet<Pagamento>(this.pagamentoRepository.findByUsuarioId(usuarioId));
+       return usuario == null? new HashSet<>() : new HashSet<>(this.pagamentoRepository.findByUsuarioId(usuarioId));
     }
 }

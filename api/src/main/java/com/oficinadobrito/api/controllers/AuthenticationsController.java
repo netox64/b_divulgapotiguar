@@ -32,7 +32,7 @@ public class AuthenticationsController {
 
     @PermitAll
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid CreateUserDto userDto) {
+    public ResponseEntity<Usuario> register(@RequestBody @Valid CreateUserDto userDto) {
         Usuario user = Usuario.toEntity(userDto);
         Usuario usuario =  this.usuariosService.newUsuario(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);

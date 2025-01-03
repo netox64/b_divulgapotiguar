@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
 import java.math.BigInteger;
 
-public class CategoriasEntityTests {
+class CategoriasEntityTests {
     private Categoria categoria;
     private String nome;
     private BigInteger bIAleatorio;
 
     @BeforeEach
-    void setUp(){
+    public void setUp(){
         this.categoria = new Categoria();
         this.nome = "Maiores";
         this.bIAleatorio = GenerateBigInteger.generateCustomRandom();
@@ -39,15 +39,15 @@ public class CategoriasEntityTests {
     @Test
     void testWhenAUserIsCreatedTheUsernameAttributeMustExist() throws NoSuchFieldException {
         //Given - Arrange
-        Field categoria = Categoria.class.getDeclaredField("categoria");
+        Field nomeField = Categoria.class.getDeclaredField("nome");
 
         //When  - Act
-        this.categoria.setCategoria(this.nome);
+        this.categoria.setNome(this.nome);
 
         //Then  - Assert
-        Assertions.assertNotNull(categoria, ()->"The name categoria attribute does not exist in user");
-        Assertions.assertEquals(String.class,categoria.getType(), ()-> "the type of the user categoria attribute must be one String");
-        Assertions.assertEquals(this.nome.toUpperCase(),this.categoria.getCategoria().toUpperCase(), () -> "Error in methods setCategoria or getCategoria");
+        Assertions.assertNotNull(nomeField, ()->"The name categoria attribute does not exist in user");
+        Assertions.assertEquals(String.class, nomeField.getType(), ()-> "the type of the name attribute must be one String");
+        Assertions.assertEquals(this.nome.toUpperCase(), this.categoria.getNome().toUpperCase(), () -> "Error in methods setNOme or getNome for Categoria");
     }
 
 }

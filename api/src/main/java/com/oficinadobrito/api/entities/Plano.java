@@ -1,12 +1,15 @@
 package com.oficinadobrito.api.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.oficinadobrito.api.utils.dtos.plano.CreatePlanoDto;
 import com.oficinadobrito.api.utils.dtos.plano.UpdatePlanoDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -14,8 +17,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_planos")
-public class Plano {
+public class Plano implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private BigInteger planoId;
@@ -39,7 +44,7 @@ public class Plano {
     @JoinColumn(name = "usuarioId")
     private Usuario usuario;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "plano")
     private Set<Anuncio> anuncios;
 

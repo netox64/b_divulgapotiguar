@@ -1,6 +1,7 @@
 package com.oficinadobrito.api.utils.dtos.usuario;
 
 public class VerifyTokenPassword {
+    
     private String email;
     private boolean verificado;
 

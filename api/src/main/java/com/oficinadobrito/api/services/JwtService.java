@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 public class JwtService {
 
     @Value("${jwt.secret}")
-    private String SecretKey;
+    private String secretKey;
 
     public String generateToken(Usuario user) {
         try {
             String scopes = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(" "));
-            Algorithm algorithm = Algorithm.HMAC256(this.SecretKey);
+            Algorithm algorithm = Algorithm.HMAC256(this.secretKey);
             return JWT.create().withIssuer("auth-api").withSubject(user.getEmail()).withExpiresAt(generateExpiration()).withClaim("Claims", scopes).sign(algorithm);
         } catch (JWTCreationException e) {
             throw new RuntimeException("Erro while generate token Jwt", e);
@@ -36,7 +36,7 @@ public class JwtService {
 
     public String validateToken(String token) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(SecretKey);
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
             return JWT.require(algorithm).withIssuer("auth-api").build().verify(token).getSubject();
         } catch (JWTVerificationException e) {
             return "";

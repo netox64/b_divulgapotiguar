@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @ActiveProfiles("test")
 @SpringBootTest()
-public class GenericsServicesTests {
+class GenericsServicesTests {
     @Mock
     private IGenericRepository<Anuncio> repository;
 

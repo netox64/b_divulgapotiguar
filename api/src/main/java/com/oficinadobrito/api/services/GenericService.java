@@ -9,6 +9,7 @@ import java.math.BigInteger;
 public class GenericService <T> implements IGenericService<T> {
 
     protected final IGenericRepository<T> repository;
+    private static final String MESSAGE = "The searched resource containing this id does not exist.";
 
     public GenericService(IGenericRepository<T> repository){
         this.repository = repository;
@@ -19,7 +20,7 @@ public class GenericService <T> implements IGenericService<T> {
     }
 
     public T findById(BigInteger id) {
-        return this.repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("The searched resource containing this id does not exist."));
+        return this.repository.findById(id).orElseThrow(()-> new ResourceNotFoundException(MESSAGE));
     }
 
     public Iterable<T> findAll() {
@@ -27,11 +28,11 @@ public class GenericService <T> implements IGenericService<T> {
     }
 
     public T updateById(BigInteger id, T resource) {
-        return this.repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("The searched resource containing this id does not exist."));
+        return this.repository.findById(id).orElseThrow(()-> new ResourceNotFoundException(MESSAGE));
     }
 
     public void delete(BigInteger id) {
         this.repository.deleteById(id);
-        this.repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("The searched resource containing this id does not exist."));;
+        this.repository.findById(id).orElseThrow(()-> new ResourceNotFoundException(MESSAGE));
     }
 }

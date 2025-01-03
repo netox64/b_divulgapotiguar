@@ -22,7 +22,7 @@
     <a href="#Folder_Architecture">Folder Architecture BackEnd</a> •
     <a href="#Running_Application">Running application</a> •
     <a href="#About_the_Author">About the Author</a> •
-    <a href="https://github.com/neto-works/estocaria_ponto_net/blob/main/LICENSE">Licensing</a>
+    <a href="https://github.com/netox64/b_divulgapotiguar/blob/main/LICENSE">Licensing</a>
 </p>
 
 ## Technologies_Used
@@ -57,7 +57,7 @@ api.src
 
 ## Bank_Model
 
-<img src="https://github.com/yt-neto/milkapi/blob/main/docs/diagramas/banco.png" />
+<img src="https://github.com/netox64/b_divulgapotiguar/blob/main/docs/api_potiguar.png" />
 
 
 ## Prerequisites

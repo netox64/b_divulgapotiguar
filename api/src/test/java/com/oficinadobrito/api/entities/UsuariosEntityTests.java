@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 
 import com.oficinadobrito.api.utils.enums.UserRole;
 
-public class UsuariosEntityTests {
+class UsuariosEntityTests {
     private Usuario usuario;
     private String novo;
 
@@ -35,16 +35,16 @@ public class UsuariosEntityTests {
     @Test
     void testWhenAUserIsCreatedTheIdAttributeMustExist() throws NoSuchFieldException {
         //Given - Arrange
+        String novoId = UUID.randomUUID().toString();
         Field id = Usuario.class.getDeclaredField("usuarioId");
 
         //When  - Act
-        String novo = UUID.randomUUID().toString();
-        this.usuario.setUsuarioId(novo);
+        this.usuario.setUsuarioId(novoId);
 
         //Then  - Assert
         Assertions.assertNotNull(id, ()->"The id attribute does not exist in user");
         Assertions.assertEquals(String.class,id.getType(), ()-> "The type of the user ID attribute must be one UUID");
-        Assertions.assertEquals(novo,this.usuario.getUsuarioId(), () -> "Error in methods setId or getId");
+        Assertions.assertEquals(novoId,this.usuario.getUsuarioId(), () -> "Error in methods setId or getId");
     }
 
     @DisplayName("When a user is created, the username attribute must exist")
@@ -66,16 +66,16 @@ public class UsuariosEntityTests {
     @Test
     void testWhenAUserIsCreatedTheEmailAttributeMustExist() throws NoSuchFieldException {
         //Given - Arrange
+        String emailFake = "Caleby@gmail.com";
         Field email = Usuario.class.getDeclaredField("email");
 
         //When  - Act
-        this.novo = "Caleby@gmail.com";
-        this.usuario.setEmail(novo);
+        this.usuario.setEmail(emailFake);
 
         //Then  - Assert
         Assertions.assertNotNull(email, ()->"The email attribute does not exist in user");
         Assertions.assertEquals(String.class,email.getType(), ()-> "the type of the user email attribute must be one String");
-        Assertions.assertEquals(novo.toUpperCase(),this.usuario.getEmail().toUpperCase(), () -> "Error in methods setEmail or getEMail");
+        Assertions.assertEquals(emailFake.toUpperCase(),this.usuario.getEmail().toUpperCase(), () -> "Error in methods setEmail or getEMail");
     }
 
     @DisplayName("When a user is created, the password attribute must exist")
@@ -83,15 +83,15 @@ public class UsuariosEntityTests {
     void testWhenAUserIsCreatedThePasswordAttributeMustExist() throws NoSuchFieldException {
         //Given - Arrange
         Field password = Usuario.class.getDeclaredField("password");
+        String passwordString = "JordiAlph3000&343";
 
         //When  - Act
-        String novo = "Caleby";
-        this.usuario.setPassword(novo);
+        this.usuario.setPassword(passwordString);
 
         //Then  - Assert
         Assertions.assertNotNull(password, ()->"The password attribute does not exist in user");
         Assertions.assertEquals(String.class,password.getType(), ()-> "the type of the user password attribute must be one String");
-        Assertions.assertEquals(novo.toUpperCase(),this.usuario.getPassword().toUpperCase(), () -> "Error in methods setPassword or getPassword");
+        Assertions.assertEquals(passwordString.toUpperCase(),this.usuario.getPassword().toUpperCase(), () -> "Error in methods setPassword or getPassword");
     }
 
     @DisplayName("When a user is created, the role attribute must exist and can be defined with the types, Admin, user, vendedor e gerente")
@@ -99,9 +99,6 @@ public class UsuariosEntityTests {
     void testWhenAUserIsCreatedTheRoleAttributeMustExist() throws NoSuchFieldException {
         //Given - Arrange
         Field role = Usuario.class.getDeclaredField("role");
-
-        //When  - Act
-        //this.usuario.setRole(UserRole.ADMIN);
 
         //Then  - Assert
         Assertions.assertEquals(4, UserRole.values().length, ()-> "error the total number of values the UserRole enumeration must be 4: ADMIN, USER, VENDEDOR, GERENTE");

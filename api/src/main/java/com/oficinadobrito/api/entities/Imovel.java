@@ -5,11 +5,15 @@ import com.oficinadobrito.api.utils.dtos.imovel.UpdateImovelDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.io.Serializable;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "Imoveis")
-public class Imovel {
+@Table(name = "tb_imoveis")
+public class Imovel implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,9 +38,6 @@ public class Imovel {
 
     @OneToOne(mappedBy = "imovel")
     private Anuncio anuncio;
-
-    public Imovel() {
-    }
 
     public BigInteger getImovelId() {
         return imovelId;

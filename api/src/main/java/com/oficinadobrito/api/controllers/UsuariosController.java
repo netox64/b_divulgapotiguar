@@ -10,7 +10,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +22,7 @@ public class UsuariosController {
     private final PagamentosService pagamentosService;
     private final PlanosService planosService;
     private final UsuariosService usuariosService;
+    private static final String NOT_EXISTS = "Not exists usuario with id informed";
 
     public UsuariosController(NotificacoesService notificacoesService, FeedbacksService feedbacksService, PagamentosService pagamentosService, PlanosService planosService, UsuariosService usuariosService) {
         this.notificacoesService = notificacoesService;
@@ -54,7 +54,7 @@ public class UsuariosController {
     @SecurityRequirement(name = "JWT")
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUsuario(@PathVariable("id") String id, @RequestBody @Valid UpdateUsuarioDto usuarioDto) {
+    public ResponseEntity<Usuario> updateUsuario(@PathVariable("id") String id, @RequestBody @Valid UpdateUsuarioDto usuarioDto) {
         Usuario usuarioUpdate = Usuario.updateDtoToEntity(usuarioDto);
         Usuario usuario = this.usuariosService.updateUsuario(id,usuarioUpdate);
         return ResponseEntity.ok(usuario);
@@ -64,11 +64,11 @@ public class UsuariosController {
     @SecurityRequirement(name = "JWT")
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @GetMapping("/{id}/notificacoes")
-    public ResponseEntity<?> getAllNotificaoesForUsuarioId(@PathVariable("id") String id) {
+    public ResponseEntity<Set<Notificacao>> getAllNotificaoesForUsuarioId(@PathVariable("id") String id) {
         Set<Notificacao> notificacoes = notificacoesService.getAllNotificationForUsuario(id);
 
         if (notificacoes.isEmpty()) {
-            throw new ResourceNotFoundException("Not exists usuario with id informed");
+            throw new ResourceNotFoundException(NOT_EXISTS);
         }
 
         return ResponseEntity.ok(notificacoes);
@@ -78,11 +78,11 @@ public class UsuariosController {
     @SecurityRequirement(name = "JWT")
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @GetMapping("/{id}/feedbacks")
-    public ResponseEntity<?> getAllFeedbacksForUsuarioId(@PathVariable("id") String id) {
+    public ResponseEntity<Set<Feedback>> getAllFeedbacksForUsuarioId(@PathVariable("id") String id) {
         Set<Feedback> feedbacks = feedbacksService.getAllFeedbacksForUsuario(id);
 
         if (feedbacks.isEmpty()) {
-            throw new ResourceNotFoundException("Not exists usuario with id informed");
+            throw new ResourceNotFoundException(NOT_EXISTS);
         }
 
         return ResponseEntity.ok(feedbacks);
@@ -92,11 +92,11 @@ public class UsuariosController {
     @SecurityRequirement(name = "JWT")
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @GetMapping("/{id}/pagamentos")
-    public ResponseEntity<?> getAllPagamentosForUsuarioId(@PathVariable("id") String id) {
+    public ResponseEntity<Set<Pagamento>> getAllPagamentosForUsuarioId(@PathVariable("id") String id) {
         Set<Pagamento> feedbacks = pagamentosService.getAllPagamentosForUsuario(id);
 
         if (feedbacks.isEmpty()) {
-            throw new ResourceNotFoundException("Not exists usuario with id informed");
+            throw new ResourceNotFoundException(NOT_EXISTS);
         }
 
         return ResponseEntity.ok(feedbacks);
@@ -106,11 +106,11 @@ public class UsuariosController {
     @SecurityRequirement(name = "JWT")
     @PreAuthorize("hasRole('ADMIN') and hasRole('USER')")
     @GetMapping("/{id}/planos")
-    public ResponseEntity<?> getAllPlanosForUsuarioId(@PathVariable("id") String id) {
+    public ResponseEntity<Set<Plano>> getAllPlanosForUsuarioId(@PathVariable("id") String id) {
         Set<Plano> planos = planosService.getAllPlanosForUsuario(id);
 
         if (planos.isEmpty()) {
-            throw new ResourceNotFoundException("Not exists usuario with id informed");
+            throw new ResourceNotFoundException(NOT_EXISTS);
         }
 
         return ResponseEntity.ok(planos);

@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class NotificacoesEntityTests {
+class NotificacoesEntityTests {
     private Notificacao notificacao;
     private String novoAssunto;
     private String novaDescricao;

@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
-public class UsuariosRepositoryTests {
+class UsuariosRepositoryTests {
         @SuppressWarnings("removal")
         @MockBean
         private PasswordEncoder passwordEncoder;

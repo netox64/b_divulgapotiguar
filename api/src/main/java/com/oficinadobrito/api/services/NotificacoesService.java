@@ -21,6 +21,6 @@ public class NotificacoesService extends GenericService<Notificacao> {
 
     public Set<Notificacao> getAllNotificationForUsuario(String usuarioId){
         Usuario usuario = this.usuariosService.findUsuarioForId(usuarioId);
-        return usuario == null? new HashSet<>() : new HashSet<Notificacao>(this.notificacaoRepository.findByUsuarioId(usuarioId));
+        return usuario == null? new HashSet<>() : new HashSet<>(this.notificacaoRepository.findByUsuarioId(usuarioId));
     }
 }

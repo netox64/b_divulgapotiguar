@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
 import java.math.BigInteger;
 
-public class FeedbacksEntityTests {
+class FeedbacksEntityTests {
     private Feedback feedback;
     private String novoComentario;
     private String novoRemetenteUsername;

@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RestController
@@ -27,14 +26,14 @@ public class FeedbackController {
     }
 
     @PostMapping("/usuarios/{id}")
-    public ResponseEntity<?> postFeedbackUsuario(@PathVariable("id") String id, @RequestBody @Valid CreateFeedbackDto resource) {
+    public ResponseEntity<Feedback> postFeedbackUsuario(@PathVariable("id") String id, @RequestBody @Valid CreateFeedbackDto resource) {
         Feedback novoFeedback = Feedback.createDtoToEntity(resource);
         Feedback feedbackSend = this.feedbacksService.sendFeedbackUsuario(id, novoFeedback);
         return ResponseEntity.status(HttpStatus.CREATED).body(feedbackSend);
     }
 
     @PostMapping("/anuncios/{id}")
-    public ResponseEntity<?> postFeedbackAnuncio(@PathVariable("id") BigInteger id, @RequestBody @Valid CreateFeedbackDto resource) {
+    public ResponseEntity<Feedback> postFeedbackAnuncio(@PathVariable("id") BigInteger id, @RequestBody @Valid CreateFeedbackDto resource) {
         Feedback novoFeedback = Feedback.createDtoToEntity(resource);
         Feedback feedbackSend = this.feedbacksService.sendFeedbackAnuncio(id, novoFeedback);
         return ResponseEntity.ok(feedbackSend);
@@ -42,19 +41,19 @@ public class FeedbackController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getResourceById(@PathVariable("id") BigInteger id) {
+    public ResponseEntity<Feedback> getResourceById(@PathVariable("id") BigInteger id) {
         Feedback categoria = this.feedbacksService.findById(id);
         return ResponseEntity.ok(categoria);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Feedback>> getAllResource() {
-        List<Feedback> categorias = StreamSupport.stream(this.feedbacksService.findAll().spliterator(), false).collect(Collectors.toList());
+        List<Feedback> categorias = StreamSupport.stream(this.feedbacksService.findAll().spliterator(), false).toList();
         return ResponseEntity.ok(categorias);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateResource(@PathVariable("id") BigInteger id, @RequestBody @Valid UpdateFeedbackDto resource) {
+    public ResponseEntity<Feedback> updateResource(@PathVariable("id") BigInteger id, @RequestBody @Valid UpdateFeedbackDto resource) {
         Feedback feedbackUpdate = Feedback.updateDtoToEntity(resource);
         Feedback feedback = this.feedbacksService.updateById(id, feedbackUpdate);
         boolean eh = resource.usuarioId().equals(resource.usuarioRequestId());
@@ -67,7 +66,7 @@ public class FeedbackController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteResourceById(@PathVariable("id") BigInteger id, @RequestBody @Valid DeleteFeedbackDto resource) {
+    public ResponseEntity<Void> deleteResourceById(@PathVariable("id") BigInteger id, @RequestBody @Valid DeleteFeedbackDto resource) {
 
         Feedback feedback = this.feedbacksService.findById(id);
 

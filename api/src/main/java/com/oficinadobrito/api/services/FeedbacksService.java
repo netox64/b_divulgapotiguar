@@ -41,7 +41,7 @@ public class FeedbacksService extends GenericService<Feedback> {
 
     public Set<Feedback> getAllFeedbacksForUsuario(String usuarioId){
         Usuario usuario = this.usuariosService.findUsuarioForId(usuarioId);
-        return usuario == null? new HashSet<>() : new HashSet<Feedback>(this.feedbackRepository.findByUsuarioId(usuarioId));
+        return usuario == null? new HashSet<>() : new HashSet<>(this.feedbackRepository.findByUsuarioId(usuarioId));
     }
 
 }

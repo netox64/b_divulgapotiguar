@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RestController
@@ -41,7 +40,7 @@ public class ImoveisController implements IController<Imovel, CreateImovelDto, U
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
     public ResponseEntity<List<Imovel>> getAllResource() {
-        List<Imovel> imoveis = StreamSupport.stream(this.imoveisService.findAll().spliterator(), false).collect(Collectors.toList());
+        List<Imovel> imoveis = StreamSupport.stream(this.imoveisService.findAll().spliterator(), false).toList();
         return ResponseEntity.ok(imoveis);
     }
 

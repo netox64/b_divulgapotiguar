@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RestController
@@ -30,7 +29,7 @@ public class NotificacoesController implements IController<Notificacao, CreateNo
 
     @PostMapping()
     @Override
-    public ResponseEntity<?> postResource(@RequestBody @Valid CreateNotificacaoDto resource) {
+    public ResponseEntity<Notificacao> postResource(@RequestBody @Valid CreateNotificacaoDto resource) {
         Notificacao nova = Notificacao.createDtoToEntity(resource);
         Usuario usuario = this.usuariosService.findUsuarioForId(resource.usuarioId());
         nova.setUsuario(usuario);
@@ -41,20 +40,20 @@ public class NotificacoesController implements IController<Notificacao, CreateNo
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
     public ResponseEntity<List<Notificacao>> getAllResource() {
-        List<Notificacao> notificacaoList = StreamSupport.stream(this.notificacoesServices.findAll().spliterator(), false).collect(Collectors.toList());
+        List<Notificacao> notificacaoList = StreamSupport.stream(this.notificacoesServices.findAll().spliterator(), false).toList();
         return ResponseEntity.ok(notificacaoList);
     }
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<?> getResourceById(@PathVariable("id") BigInteger id) {
+    public ResponseEntity<Notificacao> getResourceById(@PathVariable("id") BigInteger id) {
         Notificacao notificacao = this.notificacoesServices.findById(id);
         return  ResponseEntity.ok(notificacao);
     }
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<?> updateResource(@PathVariable("id") BigInteger id,@RequestBody @Valid UpdateNotificacaoDto resource) {
+    public ResponseEntity<Notificacao> updateResource(@PathVariable("id") BigInteger id,@RequestBody @Valid UpdateNotificacaoDto resource) {
         Notificacao notificacoUpdate = Notificacao.updateDtoToEntity(resource);
         Notificacao anuncio = this.notificacoesServices.updateById(id,notificacoUpdate);
         return ResponseEntity.ok(anuncio);

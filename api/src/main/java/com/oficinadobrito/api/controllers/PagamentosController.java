@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RestController
@@ -31,7 +30,7 @@ public class PagamentosController implements IController<Pagamento, CreatePagame
 
     @PostMapping()
     @Override
-    public ResponseEntity<?> postResource(@RequestBody @Valid CreatePagamentoDto resource) {
+    public ResponseEntity<Pagamento> postResource(@RequestBody @Valid CreatePagamentoDto resource) {
         Pagamento novo = Pagamento.createDtoToEntity(resource);
         Usuario usuario = this.usuariosService.findUsuarioForId(resource.usuarioId());
         novo.setUsuario(usuario);
@@ -42,13 +41,13 @@ public class PagamentosController implements IController<Pagamento, CreatePagame
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
     public ResponseEntity<List<Pagamento>> getAllResource() {
-        List<Pagamento> pagamentoList = StreamSupport.stream(this.pagamentosService.findAll().spliterator(), false).collect(Collectors.toList());
+        List<Pagamento> pagamentoList = StreamSupport.stream(this.pagamentosService.findAll().spliterator(), false).toList();
         return ResponseEntity.ok(pagamentoList);
     }
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<?> getResourceById(@PathVariable("id") BigInteger id) {
+    public ResponseEntity<Pagamento> getResourceById(@PathVariable("id") BigInteger id) {
         Pagamento pagamento = this.pagamentosService.findById(id);
         return  ResponseEntity.ok(pagamento);
     }

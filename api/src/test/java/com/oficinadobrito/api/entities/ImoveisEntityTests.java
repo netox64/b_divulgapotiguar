@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ImoveisEntityTests {
+class ImoveisEntityTests {
     private Imovel imovel;
     private String novoNome;
     private String novaLocalizacao;
