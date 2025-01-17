@@ -1,0 +1,1449 @@
+{
+  "name": "endpoints",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "usuarios",
+      "items": [
+        {
+          "type": "http",
+          "name": "getAll",
+          "seq": 1,
+          "request": {
+            "url": "{{url_base}}/usuarios",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2NDMyLCJDbGFpbXMiOiJVU0VSIn0.qOdoKoG6MpR4xfYU_P5r69Zd2iol9V8vUsECeISBt50"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getOne",
+          "seq": 2,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "create",
+          "seq": 3,
+          "request": {
+            "url": "{{url_base}}/auth/register",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"caduzera\",\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Seujorge3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "seq": 5,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"password\": \"Cazu3000#\",\n  \"role\": \"ADMIN\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/usuarios/1",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": ""
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "logar",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/auth/login",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Cazu3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "auth",
+      "items": [
+        {
+          "type": "http",
+          "name": "create",
+          "seq": 3,
+          "request": {
+            "url": "{{url_base}}/auth/register",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"caduzera\",\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Seujorge3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/usuarios/1",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": ""
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getAll",
+          "seq": 1,
+          "request": {
+            "url": "{{url_base}}/usuarios",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2NDMyLCJDbGFpbXMiOiJVU0VSIn0.qOdoKoG6MpR4xfYU_P5r69Zd2iol9V8vUsECeISBt50"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "logar",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/auth/login",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Cazu3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getOne",
+          "seq": 2,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "seq": 5,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"password\": \"Cazu3000#\",\n  \"role\": \"ADMIN\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "anuncios",
+      "items": [
+        {
+          "type": "http",
+          "name": "create",
+          "seq": 3,
+          "request": {
+            "url": "{{url_base}}/anuncios",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"caduzera\",\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Seujorge3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getAll",
+          "seq": 1,
+          "request": {
+            "url": "{{url_base}}/anuncios",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2NDMyLCJDbGFpbXMiOiJVU0VSIn0.qOdoKoG6MpR4xfYU_P5r69Zd2iol9V8vUsECeISBt50"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/anuncios/1",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": ""
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getOne",
+          "seq": 2,
+          "request": {
+            "url": "{{url_base}}/anuncios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "seq": 5,
+          "request": {
+            "url": "{{url_base}}/anuncios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"password\": \"Cazu3000#\",\n  \"role\": \"ADMIN\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "categorias",
+      "items": [
+        {
+          "type": "http",
+          "name": "delete",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/categorias/1",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": ""
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "create",
+          "seq": 3,
+          "request": {
+            "url": "{{url_base}}/categorias",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"caduzera\",\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Seujorge3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getOne",
+          "seq": 2,
+          "request": {
+            "url": "{{url_base}}/categorias/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getAll",
+          "seq": 1,
+          "request": {
+            "url": "{{url_base}}/categorias",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2NDMyLCJDbGFpbXMiOiJVU0VSIn0.qOdoKoG6MpR4xfYU_P5r69Zd2iol9V8vUsECeISBt50"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "seq": 5,
+          "request": {
+            "url": "{{url_base}}/categorias/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"password\": \"Cazu3000#\",\n  \"role\": \"ADMIN\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "feedbacks",
+      "items": [
+        {
+          "type": "http",
+          "name": "create",
+          "seq": 3,
+          "request": {
+            "url": "{{url_base}}/feedbacks",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"caduzera\",\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Seujorge3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/feedbacks/1",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": ""
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getOne",
+          "seq": 2,
+          "request": {
+            "url": "{{url_base}}/feedbacks/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getAll",
+          "seq": 1,
+          "request": {
+            "url": "{{url_base}}/feedbacks",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2NDMyLCJDbGFpbXMiOiJVU0VSIn0.qOdoKoG6MpR4xfYU_P5r69Zd2iol9V8vUsECeISBt50"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "seq": 5,
+          "request": {
+            "url": "{{url_base}}/feedbacks/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"password\": \"Cazu3000#\",\n  \"role\": \"ADMIN\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "imoveis",
+      "items": [
+        {
+          "type": "http",
+          "name": "create",
+          "seq": 3,
+          "request": {
+            "url": "{{url_base}}/auth/register",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"caduzera\",\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Seujorge3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getAll",
+          "seq": 1,
+          "request": {
+            "url": "{{url_base}}/usuarios",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2NDMyLCJDbGFpbXMiOiJVU0VSIn0.qOdoKoG6MpR4xfYU_P5r69Zd2iol9V8vUsECeISBt50"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getOne",
+          "seq": 2,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "logar",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/auth/login",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Cazu3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "seq": 5,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"password\": \"Cazu3000#\",\n  \"role\": \"ADMIN\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/usuarios/1",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": ""
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "planos",
+      "items": [
+        {
+          "type": "http",
+          "name": "getAll",
+          "seq": 1,
+          "request": {
+            "url": "{{url_base}}/usuarios",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2NDMyLCJDbGFpbXMiOiJVU0VSIn0.qOdoKoG6MpR4xfYU_P5r69Zd2iol9V8vUsECeISBt50"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getOne",
+          "seq": 2,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "logar",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/auth/login",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Cazu3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/usuarios/1",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": ""
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "create",
+          "seq": 3,
+          "request": {
+            "url": "{{url_base}}/auth/register",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"caduzera\",\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Seujorge3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "seq": 5,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"password\": \"Cazu3000#\",\n  \"role\": \"ADMIN\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "pagamentos",
+      "items": [
+        {
+          "type": "http",
+          "name": "create",
+          "seq": 3,
+          "request": {
+            "url": "{{url_base}}/auth/register",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"caduzera\",\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Seujorge3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getAll",
+          "seq": 1,
+          "request": {
+            "url": "{{url_base}}/usuarios",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2NDMyLCJDbGFpbXMiOiJVU0VSIn0.qOdoKoG6MpR4xfYU_P5r69Zd2iol9V8vUsECeISBt50"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "logar",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/auth/login",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Cazu3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/usuarios/1",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": ""
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getOne",
+          "seq": 2,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "seq": 5,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"password\": \"Cazu3000#\",\n  \"role\": \"ADMIN\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "notificacoes",
+      "items": [
+        {
+          "type": "http",
+          "name": "create",
+          "seq": 3,
+          "request": {
+            "url": "{{url_base}}/auth/register",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"caduzera\",\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Seujorge3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getAll",
+          "seq": 1,
+          "request": {
+            "url": "{{url_base}}/usuarios",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2NDMyLCJDbGFpbXMiOiJVU0VSIn0.qOdoKoG6MpR4xfYU_P5r69Zd2iol9V8vUsECeISBt50"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "delete",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/usuarios/1",
+            "method": "DELETE",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": ""
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "getOne",
+          "seq": 2,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "update",
+          "seq": 5,
+          "request": {
+            "url": "{{url_base}}/usuarios/2ca6d6a4-94ba-46c9-991e-8408b2996c22",
+            "method": "PUT",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"password\": \"Cazu3000#\",\n  \"role\": \"ADMIN\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "bearer",
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImNhZHV4MzBAZ21haWwuY29tIiwiZXhwIjoxNzM1NTI2Njg1LCJDbGFpbXMiOiJVU0VSIn0.HPQui45eICipifkNMyY1g3kJ66mp2Icd0HlJUPegPU8"
+              }
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "logar",
+          "seq": 6,
+          "request": {
+            "url": "{{url_base}}/auth/login",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\": \"cadux30@gmail.com\",\n  \"password\": \"Cazu3000#\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "activeEnvironmentUid": "FiU35l4ShoaDibS1QhpCD",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "url_base",
+          "value": "http://localhost:8080",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "localhost"
+    }
+  ],
+  "brunoConfig": {
+    "version": "1",
+    "name": "endpoints",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}
