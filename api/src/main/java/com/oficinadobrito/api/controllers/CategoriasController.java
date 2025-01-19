@@ -5,9 +5,13 @@ import com.oficinadobrito.api.entities.Categoria;
 import com.oficinadobrito.api.services.CategoriasService;
 import com.oficinadobrito.api.utils.dtos.categoria.CreateCategoriaDto;
 import com.oficinadobrito.api.utils.dtos.categoria.UpdateCategoriaDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 import java.util.List;
@@ -23,6 +27,9 @@ public class CategoriasController implements IController<Categoria, CreateCatego
         this.categoriasServices = categoriasServices;
     }
 
+    @Operation(summary = "create one categoria")
+    @SecurityRequirement(name = "JWT")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @PostMapping()
     @Override
     public ResponseEntity<Categoria> postResource(@RequestBody @Valid CreateCategoriaDto resource) {
@@ -30,6 +37,7 @@ public class CategoriasController implements IController<Categoria, CreateCatego
         return ResponseEntity.ok(this.categoriasServices.save(categoria));
     }
 
+    @PermitAll
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<Categoria> getResourceById(@PathVariable("id") BigInteger id) {
@@ -37,6 +45,7 @@ public class CategoriasController implements IController<Categoria, CreateCatego
         return ResponseEntity.ok(categoria);
     }
 
+    @PermitAll
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
     public ResponseEntity<List<Categoria>> getAllResource() {
@@ -44,6 +53,9 @@ public class CategoriasController implements IController<Categoria, CreateCatego
         return ResponseEntity.ok(categorias);
     }
 
+    @Operation(summary = "put one categoria")
+    @SecurityRequirement(name = "JWT")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @PutMapping("/{id}")
     @Override
     public ResponseEntity<Categoria> updateResource(@PathVariable("id") BigInteger id, @RequestBody @Valid UpdateCategoriaDto resource) {
@@ -54,6 +66,9 @@ public class CategoriasController implements IController<Categoria, CreateCatego
 
     }
 
+    @Operation(summary = "remove one categoria")
+    @SecurityRequirement(name = "JWT")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<Void> deleteResourceById(@PathVariable("id") BigInteger id) {

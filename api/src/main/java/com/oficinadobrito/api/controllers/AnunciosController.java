@@ -4,9 +4,11 @@ import com.oficinadobrito.api.controllers.interfaces.IController;
 import com.oficinadobrito.api.entities.Anuncio;
 import com.oficinadobrito.api.entities.Categoria;
 import com.oficinadobrito.api.entities.Imovel;
+import com.oficinadobrito.api.entities.Usuario;
 import com.oficinadobrito.api.services.AnunciosService;
 import com.oficinadobrito.api.services.CategoriasService;
 import com.oficinadobrito.api.services.ImoveisService;
+import com.oficinadobrito.api.services.UsuariosService;
 import com.oficinadobrito.api.utils.dtos.anuncio.CreateAnuncioDto;
 import com.oficinadobrito.api.utils.dtos.anuncio.UpdateAnuncioDto;
 import jakarta.annotation.security.PermitAll;
@@ -29,24 +31,30 @@ public class AnunciosController implements IController<Anuncio, CreateAnuncioDto
     private final AnunciosService anunciosServices;
     private final ImoveisService imoveisService;
     private final CategoriasService categoriasService;
+    private final UsuariosService usuariosService;
 
-    public AnunciosController(AnunciosService anunciosServices, ImoveisService imoveisService, CategoriasService categoriasService) {
+    public AnunciosController(AnunciosService anunciosServices, ImoveisService imoveisService, CategoriasService categoriasService,UsuariosService usuariosService) {
         this.anunciosServices = anunciosServices;
         this.imoveisService = imoveisService;
         this.categoriasService = categoriasService;
+        this.usuariosService = usuariosService;
     }
 
     @PermitAll
     @PostMapping()
     @Override
     public ResponseEntity<Anuncio> postResource(@RequestBody @Valid CreateAnuncioDto resource) {
-        Anuncio novo = Anuncio.createDtoToEntity(resource);
+        Anuncio anuncio = Anuncio.createDtoToEntity(resource);
         Imovel imovel = this.imoveisService.findById(resource.imovelId());
-        novo.setImovel(imovel);
+        imovel.setAnunciado(true);
+        var imovelAtualizado = this.imoveisService.updateById(imovel.getImovelId(),imovel);
+        anuncio.setImovel(imovelAtualizado);
+        Usuario usuario = this.usuariosService.findUsuarioById(resource.usuarioId());
+        anuncio.setUsuario(usuario);
         if (resource.categoriasIds() != null) {
-            novo.setCategorias(this.categoriasService.getAllCategoriaWithIds(resource.categoriasIds()));
+            anuncio.setCategorias(this.categoriasService.getAllCategoriaWithIds(resource.categoriasIds()));
         }
-        var anuncioCriado = this.anunciosServices.save(novo);
+        var anuncioCriado = this.anunciosServices.save(anuncio);
         return ResponseEntity.status(HttpStatus.CREATED).body(anuncioCriado);
     }
 

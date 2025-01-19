@@ -26,7 +26,10 @@ public record CreateImovelDto(
         String tipo,
 
         @NotBlank(message = "A Description of imovel cannot be empty")
-        String sobre
+        String sobre,
+
+        @NotBlank(message = "A usuario of imovel cannot be empty")
+        String usuarioId
 ) {
         public Double areaCalculada() {
                 return comprimento * largura;

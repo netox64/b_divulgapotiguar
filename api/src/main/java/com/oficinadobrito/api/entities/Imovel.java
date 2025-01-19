@@ -46,13 +46,16 @@ public class Imovel implements Serializable {
     @NotBlank(message = "A Description of imovel cannot be empty")
     private String sobre;
 
+    private boolean isAnunciado;
+
     @JsonIgnore
     @OneToOne(mappedBy = "imovel")
     private Anuncio anuncio;
 
-    public BigInteger getImovelId() {
-        return imovelId;
-    }
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "usuarioId")
+    private Usuario usuario;
 
     public String getNome() {
         return nome;
@@ -99,6 +102,7 @@ public class Imovel implements Serializable {
         novo.setImagemImovel(dto.imagem());
         novo.setTipo(dto.tipo());
         novo.setSobre(dto.sobre());
+        novo.setAnunciado(false);
         return novo;
     }
 
@@ -111,6 +115,7 @@ public class Imovel implements Serializable {
         novo.setImagemImovel(dto.imagem());
         novo.setTipo(dto.tipo());
         novo.setSobre(dto.sobre());
+        novo.setAnunciado(dto.isAnunciado());
         return novo;
     }
 
@@ -152,5 +157,25 @@ public class Imovel implements Serializable {
 
     public void setImagemImovel(String imagemImovel) {
         this.imagemImovel = imagemImovel;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public BigInteger getImovelId() {
+        return imovelId;
+    }
+
+    public boolean isAnunciado() {
+        return isAnunciado;
+    }
+
+    public void setAnunciado(boolean anunciado) {
+        isAnunciado = anunciado;
     }
 }

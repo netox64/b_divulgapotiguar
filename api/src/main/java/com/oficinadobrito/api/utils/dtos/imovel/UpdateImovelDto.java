@@ -21,6 +21,8 @@ public record UpdateImovelDto(
         @NotBlank(message = "O tipo of imovel cannot be empty")
         String tipo,
 
+        boolean isAnunciado,
+
         @NotBlank(message = "A Description of imovel cannot be empty")
         String sobre,
 

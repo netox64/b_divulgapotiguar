@@ -84,12 +84,17 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuario")
     private Set<Anuncio> anuncios;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
+    private Set<Imovel> imoveis;
+
     public Usuario(){
         this.notificacoes = new HashSet<>();
         this.feedbacks = new HashSet<>();
         this.pagamentos = new HashSet<>();
         this.planos = new HashSet<>();
         this.anuncios = new HashSet<>();
+        this.imoveis = new HashSet<>();
     }
 
     public Usuario(String username, String email, String phone, String cpf, String password, UserRole role) {
@@ -253,5 +258,13 @@ public class Usuario implements UserDetails {
         novo.setPassword(dto.password());
         novo.setRole(dto.role());
         return novo;
+    }
+
+    public Set<Imovel> getImoveis() {
+        return imoveis;
+    }
+
+    public void setImoveis(Set<Imovel> imoveis) {
+        this.imoveis = imoveis;
     }
 }

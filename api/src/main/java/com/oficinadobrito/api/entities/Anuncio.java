@@ -181,7 +181,7 @@ public class Anuncio implements Serializable{
         novo.setImagemPropaganda(dto.imagemPropaganda());
         novo.setTipoPagamento(dto.tipoPagamento());
         novo.setPreco(dto.preco());
-        novo.setDataAnuncio(dto.dataAnuncio());
+        novo.setDataAnuncio(LocalDate.now());
         return novo;
     }
     public static Anuncio updateDtoToEntity(UpdateAnuncioDto dto){

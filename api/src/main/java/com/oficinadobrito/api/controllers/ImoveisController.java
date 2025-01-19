@@ -2,7 +2,9 @@ package com.oficinadobrito.api.controllers;
 
 import com.oficinadobrito.api.controllers.interfaces.IController;
 import com.oficinadobrito.api.entities.Imovel;
+import com.oficinadobrito.api.entities.Usuario;
 import com.oficinadobrito.api.services.ImoveisService;
+import com.oficinadobrito.api.services.UsuariosService;
 import com.oficinadobrito.api.utils.dtos.imovel.CreateImovelDto;
 import com.oficinadobrito.api.utils.dtos.imovel.UpdateImovelDto;
 import jakarta.validation.Valid;
@@ -19,15 +21,19 @@ import java.util.stream.StreamSupport;
 public class ImoveisController implements IController<Imovel, CreateImovelDto, UpdateImovelDto> {
 
     private final ImoveisService imoveisService;
+    private final UsuariosService usuariosService;
 
-    public ImoveisController(ImoveisService imoveisService) {
+    public ImoveisController(ImoveisService imoveisService, UsuariosService usuariosService) {
         this.imoveisService = imoveisService;
+        this.usuariosService = usuariosService;
     }
 
     @PostMapping()
     @Override
     public ResponseEntity<Imovel> postResource(@RequestBody @Valid CreateImovelDto resource) {
         Imovel novo = Imovel.createDtoToEntity(resource);
+        Usuario usuario = this.usuariosService.findUsuarioForId(resource.usuarioId());
+        novo.setUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(this.imoveisService.save(novo));
     }
 

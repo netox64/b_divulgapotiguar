@@ -31,7 +31,7 @@ public class ConfigSecurity {
             "/swagger-ui.html", "/swagger-ui/index.html", "/swagger-ui/**",
             "/webjars/**", "/auth/login", "/auth/register", "/auth/sendEmail", "/auth/redefinir",
             "/optimizations/**",
-            "/anuncios" ,"planos",
+            "/anuncios" ,"planos","categorias",
     };
 
     private static final String[] CROSS_ORIGINLIST = {

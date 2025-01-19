@@ -1,6 +1,7 @@
 package com.oficinadobrito.api.entities;
 
 import com.oficinadobrito.api.utils.GenerateBigInteger;
+import com.oficinadobrito.api.utils.GenerateUUID;
 import com.oficinadobrito.api.utils.dtos.imovel.CreateImovelDto;
 import com.oficinadobrito.api.utils.dtos.imovel.UpdateImovelDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -108,7 +109,7 @@ class ImoveisEntityTests {
     @Test
     void testCreateImovelFromDto() {
         // Given - Arrange
-        CreateImovelDto dto = new CreateImovelDto(novoNome, novaLocalizacao, comprimento,largura ,imagem, novoTipo, novaDescricao);
+        CreateImovelDto dto = new CreateImovelDto(novoNome, novaLocalizacao, comprimento,largura ,imagem, novoTipo, novaDescricao, GenerateUUID.generateUUID());
 
         // When - Act
         Imovel imovelFromDto = Imovel.createDtoToEntity(dto);
@@ -124,7 +125,7 @@ class ImoveisEntityTests {
     @Test
     void testUpdateImovelFromDto() {
         // Given - Arrange
-        UpdateImovelDto dto = new UpdateImovelDto(novoNome, comprimento,largura ,imagem, novoTipo, novaDescricao,GenerateBigInteger.generateCustomRandom());
+        UpdateImovelDto dto = new UpdateImovelDto(novoNome, comprimento,largura ,imagem, novoTipo,true, novaDescricao,GenerateBigInteger.generateCustomRandom());
 
         // When - Act
         Imovel updatedImovel = Imovel.updateDtoToEntity(dto);

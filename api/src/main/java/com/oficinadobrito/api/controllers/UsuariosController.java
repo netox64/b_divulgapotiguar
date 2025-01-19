@@ -21,18 +21,20 @@ public class UsuariosController {
     private final NotificacoesService notificacoesService;
     private final FeedbacksService feedbacksService;
     private final PagamentosService pagamentosService;
+    private final ImoveisService imoveisService;
     private final PlanosService planosService;
     private final UsuariosService usuariosService;
     private final AnunciosService anunciosService;
     private static final String NOT_EXISTS = "Not exists usuario with id informed";
 
-    public UsuariosController(NotificacoesService notificacoesService, FeedbacksService feedbacksService,AnunciosService anunciosService, PagamentosService pagamentosService, PlanosService planosService, UsuariosService usuariosService) {
+    public UsuariosController(NotificacoesService notificacoesService, FeedbacksService feedbacksService,AnunciosService anunciosService, PagamentosService pagamentosService, PlanosService planosService, UsuariosService usuariosService,ImoveisService imoveisService) {
         this.notificacoesService = notificacoesService;
         this.feedbacksService = feedbacksService;
         this.pagamentosService = pagamentosService;
         this.planosService = planosService;
         this.usuariosService = usuariosService;
-        this.anunciosService =anunciosService;
+        this.anunciosService = anunciosService;
+        this.imoveisService = imoveisService;
     }
 
     @Operation(summary = "get all usuarios")
@@ -84,6 +86,20 @@ public class UsuariosController {
         }
 
         return ResponseEntity.ok(notificacoes);
+    }
+
+    @Operation(summary = "get all notifications of one usuario")
+    @SecurityRequirement(name = "JWT")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @GetMapping("/{id}/imoveis")
+    public ResponseEntity<Set<Imovel>> getAllImoveisForUsuarioId(@PathVariable("id") String id) {
+        Set<Imovel> imoveis = this.imoveisService.getAllImoveisForUsuario(id);
+
+        if (imoveis.isEmpty()) {
+            throw new ResourceNotFoundException(NOT_EXISTS);
+        }
+
+        return ResponseEntity.ok(imoveis);
     }
 
     @Operation(summary = "get all feedbacks of one usuario")
