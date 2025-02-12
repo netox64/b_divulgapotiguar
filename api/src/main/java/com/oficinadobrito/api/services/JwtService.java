@@ -24,7 +24,7 @@ public class JwtService {
         try {
             String scopes = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(" "));
             Algorithm algorithm = Algorithm.HMAC256(this.secretKey);
-            return JWT.create().withIssuer("auth-api").withSubject(user.getEmail()).withExpiresAt(generateExpiration()).withClaim("Name", user.getUsername()).withClaim("Email", user.getEmail()).withClaim("Role", scopes).sign(algorithm);
+            return JWT.create().withIssuer("auth-api").withSubject(user.getEmail()).withExpiresAt(generateExpiration()).withClaim("Name", user.getUsername()).withClaim("Image", user.getImage()).withClaim("Email", user.getEmail()).withClaim("Role", scopes).sign(algorithm);
         } catch (JWTCreationException e) {
             throw new RuntimeException("Erro while generate token Jwt", e);
         }

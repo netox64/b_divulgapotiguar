@@ -68,9 +68,9 @@ public class ImoveisController implements IController<Imovel, CreateImovelDto, U
         return ResponseEntity.ok(imovel);
     }
 
-    @Operation(summary = "get all imoveis - (barer jwt) -> role ADMIN")
+    @Operation(summary = "get all imoveis - (barer jwt) role USER -> role ADMIN")
     @SecurityRequirement(name = "JWT")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Override
     public ResponseEntity<List<Imovel>> getAllResource() {
