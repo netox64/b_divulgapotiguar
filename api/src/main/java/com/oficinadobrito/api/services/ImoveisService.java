@@ -7,6 +7,7 @@ import com.oficinadobrito.api.entities.Usuario;
 import com.oficinadobrito.api.repositories.ImovelRepository;
 import com.oficinadobrito.api.repositories.TarefaRepository;
 import com.oficinadobrito.api.utils.dtos.imovel.AvaliacaoDto;
+import com.oficinadobrito.api.utils.enums.Status;
 import org.apache.coyote.BadRequestException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
@@ -63,6 +64,7 @@ public class ImoveisService extends GenericService<Imovel> {
         
         Imovel imovel = this.imoveisRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("imovel not found"));
         imovel.setPdfFileName(fileName);
+        imovel.setStatus(Status.SEGUIU_PARA_ANALISE);
         this.imoveisRepository.save(imovel);
     }
 

@@ -8,7 +8,7 @@
     - [x] O sistema deve ter a função de mensageria via email.
     - [x] O sistema deve permitir **redefinição de senhas** de usuarios.
     - [x] O usuario deve ser capaz de authenticar com conta do google.
-    - [ ] O sistema deve permitir modificação de tipo de usuario.
+    - [x] O sistema deve permitir modificação de tipo de usuario.
     - [x] O usuario deve ser capaz de visualizar suas mensagens de notificações.
 
 ### Sistema de Feedbacks
@@ -18,7 +18,7 @@
 
 ### Sistema de planos
 - É uma importante forma de monetizar algo em aplicações.
-    - [ ] 1 plano pode conter varios espaços de divulgação por mês.
+    - [x] 1 plano pode conter varios espaços de divulgação por mês.
     - [x] 1 plano deve ser liberado ao usuario, quando for realizado o pagamento.
     - [x] Ele deve definir quantas postagens de anuncios o usuario pode realizar.
 

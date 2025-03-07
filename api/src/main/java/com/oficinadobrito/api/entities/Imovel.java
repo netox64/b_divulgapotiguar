@@ -64,6 +64,7 @@ public class Imovel implements Serializable {
     @NotBlank(message = "A Description of imovel cannot be empty")
     private String sobre;
     
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     private boolean isAnunciado;

@@ -3,15 +3,16 @@ package com.oficinadobrito.api.utils.enums;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum Status {
-    ANUNCIADO, ANALISADO, PENDENTE, INVALIDO;
+    ANUNCIADO, ANALISADO,SEGUIU_PARA_ANALISE, PENDENTE, INVALIDO;
 
     @JsonCreator
     public static Status fromString(String value) {
         if (value != null) {
             return switch (value.toUpperCase()) {
                 case "ANUNCIADO" -> ANUNCIADO;
-                case "ANALISADO" -> ANALISADO;
                 case "PENDENTE" -> PENDENTE;
+                case "SEGUIU_PARA_ANALISE" -> SEGUIU_PARA_ANALISE;
+                case "ANALISADO" -> ANALISADO;
                 case "INVALIDO" -> INVALIDO;
                 default -> throw new IllegalArgumentException("Unknown status: " + value);
             };

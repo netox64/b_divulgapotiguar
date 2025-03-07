@@ -102,8 +102,7 @@ public class ImoveisController implements IController<Imovel, CreateImovelDto, U
     @SecurityRequirement(name = "JWT")
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/{id}/uploadPdf")
-    public ResponseEntity<String> uploadPdf(@PathVariable("id") BigInteger id,
-            @RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadPdf(@PathVariable("id") BigInteger id, @RequestParam("file") MultipartFile file) {
         try {
             this.imoveisService.savePdf(id, file);
             return ResponseEntity.ok("PDF uploaded successfully!");
@@ -120,8 +119,6 @@ public class ImoveisController implements IController<Imovel, CreateImovelDto, U
     public ResponseEntity<Resource> getPdf(@PathVariable BigInteger id) throws IOException {
         Resource resource = this.imoveisService.loadPdfFile(id);
         String fileName = resource.getFilename();
-
-        // Retorna o PDF como ResponseEntity com cabeçalho adequado para visualização
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_PDF) // Tipo de mídia para PDF
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"")

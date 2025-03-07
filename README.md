@@ -5,90 +5,118 @@
   <img src="https://github.com/netox64/b_divulgapotiguar/blob/main/docs/api_print2.png" width="250" height="250" />
 </div>
 
-<h4 align="center">This project is a backend with logic related to the promotion of properties that are for sale in the designated region.</h4>
+<h4 align="center">Este projeto é um backend com lógica relacionada à promoção de imóveis que estão à venda na região designada.</h4>
 <p align="center">
-    <a href="#Technologies_Used">Technologies Used</a> •
-    <a href="#Api_resources">Api resources</a> •
-    <a href="#Folder_Architecture">Folder Architecture FrontEnd</a> •
-    <a href="#Folder_Architecture">Folder Architecture BackEnd</a> •
-    <a href="#Running_Application">Running application</a> •
-    <a href="#About_the_Author">About the Author</a> •
-    <a href="https://github.com/netox64/b_divulgapotiguar/blob/main/LICENSE">Licensing</a>
+    <a href="#Tecnologias_Utilizadas">Tecnologias Utilizadas</a> •
+    <a href="#Arquitetura_de_Pastas">Arquitetura de Pastas</a> •
+    <a href="#Executando_Aplicativo">Executando Aplicativo</a> •
+    <a href="#Estrutura_do_Banco">Estrutura do Banco</a> •
+    <a href="#About_the_Author">Sobre o Autor</a> •
+    <a href="https://github.com/netox64/b_divulgapotiguar/blob/main/LICENSE">Licenciamento</a>
 </p>
 
-## Technologies_Used
+## Tecnologias_Utilizadas
 
-- The following technologies were used in this project:
-    - Java as a programming language.
-    - springboot application.
-    - And the docker containerization tool.
-    - Next.js to build the frontend.
+- As seguintes tecnologias foram usadas neste projeto:
+  - Java como linguagem de programação.
+  - Springboot, o framework para backend.
+  - Ferramenta de conteinerização docker.
+  - Tesseract, que é um sistema de reconhecimento ótico de caracteres (OCR) de código aberto. Ele é usado para converter imagens contendo texto em texto editável, permitindo que o computador "leia" o que está impresso ou escrito em documentos digitalizados, imagens ou fotos. Em especial nesta aplicação ele vai ser utilizado para ler imagem no documento pdf, que pode ser um pdf com texto simples ou uma imagem ai entra o Tesseract.
 
-## Folder_Architecture
+## Arquitetura_de_Pastas
 ```
 api.src
   ├  └─  main.java.ofc.api
-  ├                    └──────────  Config : all configs, springSecurity, Swagger ...
-  ├                    └──────────  Controllers : all controllers, interfaces, Dtos ...
-  ├                    └──────────  Entities  : models for aplication.
-  ├                    └──────────  Repositories : Repositories, JPa base , generics ...
-  ├                    └──────────  Services : all Services, generics and interfaces ...
+  ├                    └──────────  config : com todas as configurações do projeto, springSecurity, Swagger, Listeners ...
+  ├                    └──────────  controllers : com todas as interfaces, genericos, implementação de controladores...
+  ├                    └──────────  entities  : com modelos da aplicação.
+  ├                    └──────────  repositories :com todos os tipos genericos e interfaces repositories que extendem de JpaRepository...
+  ├                    └──────────  services : com todas as interfaces de serviço, genericos e implementações ...
+  ├                    └──────────  utils : com todos os dtos, classes auxiliares, como validadores etc ...
   ├  
-  └───────  main.resources   
-  ├                    └──────────  aplication.properties
+  └───────  main.resources
+  ├                    └──────────  tessdata                   : pasta com todos arquivos de treinamento do tesseract
+  ├                    └──────────  aplication.properties      - configurações
+  ├                    └──────────  aplication-dev.properties  - configurações de ambiente de desenvolvimento/produção
+  ├                    └──────────  aplication-test.properties - configurações de ambiente de teste
+  ├                    └──────────  sonar-project.properties   - configuração reconhecimento sonar cloud
   ├  
   └───────  test
   ├──  docher-compose.yml
   └──  pom.xml : all dependecies
 ```
 
-## Bank_Model
+## Estrutura_do_Banco
 
 <img src="https://github.com/netox64/b_divulgapotiguar/blob/main/docs/api_potiguar.png" />
 
 
-## Prerequisites
+## Prerequisitos
 
-- SDKMAN for manager version jdk
-- JDK 23
-- Docker and Docke-compose plugin
-
-## Running_Application
-- create a file called application-dev.properties inside the resources folder
-- define a jwt with base 64 characters, and your zoho email and password. And finally a secret
-- You can use this example if you want, just need your Zoho email and password.
+- SDKMAN para a versão do gerenciador jdk, eu uso mas se não quizer instala só a JDK 23 mesmo
+- Docker e plugin Docke-compose
+- Tenha o tesseract instalado na sua máquina
 
 ```
-  jwt=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  sudo apt-get install tesseract-ocr
+```
+- Precisamos exportar um caminho para o tesseract-ocr reconhecer o caminho e executar:
+
+```
+  export TESSDATA_PREFIX=/home/cl10/Projetos/b_divulgapotiguar/api/src/main/resources/tessdata/
+```
+
+- Dar permissões na pasta:
+
+```
+  sudo chmod -R 755 /home/cl10/Projetos/b_divulgapotiguar/api/src/main/resources/tessdata/
+```
+- Em caso de erro:
+> [!WARNING]
+> temos que dar permissão a 2 arquivos importantes para funcionamento do Tesseract
+```
+  sudo chmod 644 /home/cl10/Projetos/b_divulgapotiguar/api/src/main/resources/tessdata/configs &&
+  sudo chmod 644 /home/cl10/Projetos/b_divulgapotiguar/api/src/main/resources/tessdata/pdf.ttf
+```
+
+
+## Executando_Aplicativo
+- crie um arquivo chamado *application-dev.properties* dentro da pasta resources
+- defina um jwt com base 64 caracteres, e seu e-mail e senha do Zoho. E finalmente um segredo
+- Você pode usar este exemplo se quiser, só precisa do seu e-mail e senha do Zoho.
+
+```
+  jwt=secrets_com64_caracteres
   username=example@zohomail.com
   password=Example34#
   token_secret=um_toquen_qualquer
-  cpf_secret=cpf_divulga
+  cpf_secret=cpf_divulga_secrets
   
   client_id=Client_Id_...
   client_secret=Client_Secret_...
   certificate=./certs/suachavep12
 ```
 
-- create the bank:
+- crie o banco::
  ```
-    cd api && docker compose up
- ```
-
-- install dependencies:
- ```
-    mvn install 
-
+    cd api && docker-compose up
  ```
 
-- to execute:
+- instale as dependencias:
+ ```
+  sudo apt install maven -y &&
+  mvn install 
+
+ ```
+
+- execute:
 ```
   java -jar target/nome_projeto-1.0-SNAPSHOT.jar 
   or
   mvn spring-boot:run
   
 ```
-- simplify:
+- simplificando:
 ```
   docker-compose up -d && mvn spring-boot:run #or
   docker-compose start -d && mvn spring-boot:run
@@ -96,17 +124,11 @@ api.src
 
 - http://localhost:8080/swagger-ui/index.html?urls.primaryName=public
 
-## Test the application using postman
-
-- open your postman desktop
-- click import
-- import from json Bruno endpoints folder
-
 > [!IMPORTANT]
-> When opening the endpoints, check the "base_url" addressing variable if it is correct.
+> Se você não conseguiu executar corretamente, vai no meu linkedin que tem demonstração dele.
 
 > [!WARNING]
-> When making requests, pay attention to the tokens and the app's authorization policies. Errors may also be found as it is still under development
+> Ao fazer solicitações, fique atento aos tokens e às políticas de autorização do aplicativo. Erros também podem ser encontrados, pois ele ainda está em desenvolvimento.
 
 
 ## About_the_Author
